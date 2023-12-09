@@ -2,7 +2,6 @@
 
 #define max_input_size 1010
 #define max_path_size 1010
-#define wait
 
 /**
 * Function to execute a command
@@ -31,9 +30,9 @@ wait(NULL);
 }
 }
 
-void processInput(char input, char path)
+void processInput(char *input, char *path)
 {
-	char *token = strtok(input[0], " ");
+	char *token = strtok(&input[0], " ");
 if (token == NULL)
 {
 return;
