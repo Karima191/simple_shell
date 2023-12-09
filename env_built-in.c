@@ -32,10 +32,6 @@ execlp(cmd, cmd, (char *)NULL);
 fprintf(stderr, "This Command not found: %s\n", cmd);
 exit(EXIT_FAILURE);
 }
-else
-{
-	wait(NULL);
-}
 }
 /**
 * Function to print environment variables
@@ -69,6 +65,7 @@ char input[max_input_size];
 
 while (1)
 {
+	char *token;
 printf("$ ");
 if (fgets(input, max_input_size, stdin) == NULL)
 {
@@ -76,7 +73,7 @@ break;
 }
 input[strcspn(input, "\n")] = '\0';
 
-char *token = strtok(input, " ");
+token = strtok(input, " ");
 if (token == NULL)
 {
 continue;
