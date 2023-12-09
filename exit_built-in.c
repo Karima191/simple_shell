@@ -33,7 +33,7 @@ wait(NULL);
 
 void processInput(char input, char path)
 {
-	char *token = strtok(input, " ");
+	char *token = strtok(&input[0], " ");
 if (token == NULL)
 {
 return;
