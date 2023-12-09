@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "shell.h"
 
 #define max_input_size 1010
 
@@ -13,20 +11,21 @@
 int main(void)
 {
 char input[max_input_size];
+fgets(input, max_input_size, stdin);
+
+char *tok = strtok(input, " \n");
 int s = 0;
 
 while (1)
 {
 printf("Shell $  ");
-fgets(input, max_input_size, stdin);
-
-char *tok = strtok(input, " \n");
+}
 
 if (strcmp(tok, "exit") == 0)
 {
 tok = strtok(NULL, " \n");
 
-if (tok == NULL)
+if tok == NULL)
 {
 exit(s);
 }
