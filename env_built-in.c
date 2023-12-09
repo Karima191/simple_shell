@@ -1,22 +1,5 @@
 #include "shell.h"
 
-extern char **envi;
-
-#define max_input_size 1010
-#define max_path_size 1010
-#define wait
-
-Certainly, I'll provide detailed explanations within
-the /**/ for better understanding:
-
-c
-Copy code
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-extern char **envi;
 
 #define max_input_size 1010
 #define max_path_size 1010
@@ -60,10 +43,11 @@ wait(NULL);
 * This function prints all the environment variables using a while loop.
 */
 
-void printenvi()
+void printenvi(void)
 {
 char **envi = environ;
-while (*envi != NULL) {
+while (*envi != NULL)
+{
 printf("%s\n", *envi);
 envi++;
 }
@@ -79,7 +63,7 @@ envi++;
 * The program continuously executes
 * until the user types "exit" to terminate the shell.
 */
-int main(void)
+void function1(void)
 {
 char input[max_input_size];
 char *path = getenv("PATH");
@@ -108,6 +92,10 @@ if (strcmp(token, "envi") == 0)
 printenvi();
 continue;
 }
+}
+}
+int main(void)
+{
 char cmdPath[max_path_size];
 char *pathToken = strtok(path, ":");
 while (pathToken != NULL)
