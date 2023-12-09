@@ -28,6 +28,29 @@ else
 {
 wait(NULL);
 }
+}
+
+void processInput(char input, char path)
+{
+	char *token = strtok(input, " ");
+if (token == NULL)
+{
+return;
+}
+char cmdPath[max_path_size];
+char *pathToken = strtok(path, ":");
+
+while (pathToken != NULL)
+{
+snprintf(cmdPath, sizeof(cmdPath), "%s / %s", pathToken, token);
+if (access(cmdPath, W_OK) == 0)
+{
+execCmd(cmdPath);
+break;
+}
+pathToken = strtok(NULL, ":");
+}
+}
 /**
 * Main function
 * This function reads user input, tokenizes it,
@@ -36,7 +59,7 @@ wait(NULL);
 * The function also checks if the user inputs
 * the 'exit' command, in which case it terminates the shell.
 **/
-int main(void)
+void shellFunction(void)
 {
 char input[max_input_size];
 char *path = getenv("PATH");
@@ -57,24 +80,12 @@ printf("Exiting the shell!...\n");
 }
 else
 {
-char *token = strtok(input, " ");
-if (token == NULL)
+processInput(input, path);
+}
+}
+}
+int main(void)
 {
-continue;
-}
-char cmdPath[max_path_size];
-char *pathToken = strtok(path, ":");
-
-while (pathToken != NULL)
-{
-snprintf(cmdPath, sizeof(cmdPath), "%s / %s", pathToken, token);
-if (access(cmdPath, W_OK) == 0)
-{
-execCmd(cmdPath);
-break;
-}
-pathToken = strtok(NULL, ":");
-}
-}
+	shellFunction();
 return (0);
 }
