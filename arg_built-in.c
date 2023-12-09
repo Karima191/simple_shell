@@ -11,6 +11,7 @@
 int main(void)
 {
 char input[max_input_size];
+char *tok;
 int s = 0;
 
 while (1)
