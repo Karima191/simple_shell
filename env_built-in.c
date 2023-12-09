@@ -22,7 +22,7 @@ void execCmd(char *cmd)
 pid_t pid = fork();
 if (pid < 0)
 {
-perror("Error the fork is failed");
+perror("Error: the fork is failed");
 exit(EXIT_FAILURE);
 }
 else if (pid == 0)
@@ -34,7 +34,7 @@ exit(EXIT_FAILURE);
 }
 else
 {
-wait(NULL);
+	wait(NULL);
 }
 }
 /**
@@ -66,7 +66,6 @@ envi++;
 void function1(void)
 {
 char input[max_input_size];
-char *path = getenv("PATH");
 
 while (1)
 {
@@ -97,9 +96,11 @@ continue;
 int main(void)
 {
 char cmdPath[max_path_size];
+char *path = getenv("PATH");
 char *pathToken = strtok(path, ":");
 while (pathToken != NULL)
 {
+	char *token;
 snprintf(cmdPath, sizeof(cmdPath), "%s/%s", pathToken, token);
 if (access(cmdPath, W_OK) == 0)
 {
