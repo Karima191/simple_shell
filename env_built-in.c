@@ -97,14 +97,14 @@ char *path = getenv("PATH");
 char *pathToken = strtok(path, ":");
 while (pathToken != NULL)
 {
-	char *token;
-snprintf(cmdPath, sizeof(cmdPath), "%s/%s", pathToken, token);
-if (access(cmdPath, W_OK) == 0)
+	char *token = "some_default-value;
+snprintf(cmdPath, sizeof(cmdPath), " % s / % s ", pathToken, token);
+if (access(cmdPath, X_OK) == 0)
 {
 execCmd(cmdPath);
 break;
 }
-pathToken = strtok(NULL, ":");
+pathToken = strtok(NULL, " : ");
 }
 return (0);
 }
