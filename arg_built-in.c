@@ -20,7 +20,7 @@ printf("Shell $  ");
 
 fgets(input, max_input_size, stdin);
 
-char *tok = strtok(input, " \n");
+tok = strtok(input, " \n");
 
 if (tok == NULL)
 {
