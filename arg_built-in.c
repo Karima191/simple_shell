@@ -24,8 +24,8 @@ printf("Shell $  ");
 if (strcmp(tok, "exit") == 0)
 {
 tok = strtok(NULL, " \n");
-
-if tok == NULL)
+}
+if (tok == NULL)
 {
 exit(s);
 }
