@@ -2,7 +2,6 @@
 
 #define max_input_size 1010
 #define stdin_fileno
-#define wait
 
 /**
 *Function to read the input from the user
@@ -10,6 +9,9 @@
 
 char *first_getline(void)
 {
+	int buf_idx = 0;
+	int buf_size;
+	char buf[max_input_size];
 if (buf_idx >= buf_size)
 {
 buf_size = read(stdin_fileno, buf, max_input_size);
