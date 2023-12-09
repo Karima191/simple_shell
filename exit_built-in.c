@@ -34,11 +34,11 @@ void processInput(char *input, char *path)
 {
 	char *token = strtok(&input[0], " ");
 	char cmdPath[max_path_size];
+	char *pathToken = strtok(path, ":");
 if (token == NULL)
 {
 return;
 }
-char *pathToken = strtok(path, ":");
 
 while (pathToken != NULL)
 {
