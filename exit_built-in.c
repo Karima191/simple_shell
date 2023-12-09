@@ -1,12 +1,7 @@
 #include "shell.h"
 
-<<<<<<< HEAD
-#define max_input_size 1000
-#define max_path_size 1000
-=======
 #define max_input_size 1010
 #define max_path_size 1010
->>>>>>> 3595ffee3aa25c499e2760c8613e4d59e51ed446
 #define wait
 
 /**
@@ -14,44 +9,26 @@
 * This function takes a command as input
 *and executes it using fork and execlp.
 * It handles the cases where the fork fails or the command is not found.
-<<<<<<< HEAD
 */
-
-=======
-**/
->>>>>>> 3595ffee3aa25c499e2760c8613e4d59e51ed446
 void execCmd(char *cmd)
 {
 pid_t pid = fork();
 if (pid < 0)
 {
-<<<<<<< HEAD
 perror("Fork is failed");
-=======
 perror("Error fork is failed");
->>>>>>> 3595ffee3aa25c499e2760c8613e4d59e51ed446
 exit(EXIT_FAILURE);
 }
 else if (pid == 0)
 {
 execlp(cmd, cmd, (char *)NULL);
-<<<<<<< HEAD
-fprintf(stderr, "The command is not found:\n%s\n", cmd);
-=======
 fprintf(stderr, "This command is not found:\n%s\n", cmd);
->>>>>>> 3595ffee3aa25c499e2760c8613e4d59e51ed446
 exit(EXIT_FAILURE);
 }
 else
 {
 wait(NULL);
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-=======
->>>>>>> 3595ffee3aa25c499e2760c8613e4d59e51ed446
-=======
 }
 
 void processInput(char input, char path)
@@ -75,7 +52,6 @@ break;
 pathToken = strtok(NULL, ":");
 }
 }
->>>>>>> 3ddba0fba6c7de55e993f210e47541e5d4231417
 /**
 * Main function
 * This function reads user input, tokenizes it,
