@@ -1,45 +1,4 @@
-[21:44, 06/12/2023] Meriem: #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-#define max_input_size 1000
-#define max_path_size 1000
-#define wait
-
-/**
-* Function to execute a command
-* This function takes a command as input
-*and executes it using fork and execlp.
-* It handles the cases where the fork fails or the command is not found.
-*/
-
-void execCmd(char *cmd)
-{
-pid_t pid = fork();
-if (pid < 0)
-{
-perror("Fork is failed");
-exit(EXIT_FAILURE);
-}
-else if (pid == 0)
-{
-execlp(cmd, cmd, (char *)NULL);
-fprintf(stderr, "The command is not found:\n%s\n", cmd);
-exit(EXIT_FAILURE);
-}
-else
-{
-wait(NULL);
-}
-}
-/**
-* Main function
-* This function reads user input, tok…
-[21:44, 06/12/2023] Meriem: Task 3
-[21:44, 06/12/2023] Meriem: Task name path.c
-[21:44, 06/12/2023] Meriem: Task 4 name of file is exit_built-in.c
-[21:44, 06/12/2023] Meriem: #include "shell.h"
+#include "shell.h"
 
 #define max_input_size 1010
 #define max_path_size 1010
@@ -108,13 +67,14 @@ char *pathToken = strtok(path, ":");
 
 while (pathToken != NULL)
 {
-snprintf(cmdPath, sizeof(cmdPath), "%s/%s", pathToken, token);
+snprintf(cmdPath, sizeof(cmdPath), "%s / %s", pathToken, token);
 if (access(cmdPath, W_OK) == 0)
 {
 execCmd(cmdPath);
 break;
 }
-pathToken = strtok(NULL, ":");}
+pathToken = strtok(NULL, ":");
+}
 }
 return (0);
 }
