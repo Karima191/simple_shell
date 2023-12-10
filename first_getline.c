@@ -14,7 +14,7 @@ char *first_getline(void)
 	char buf[max_input_size];
 if (buf_idx >= buf_size)
 {
-buf_size = read(stdin_fileno, buf, max_input_size);
+buf_size = read(0, buf, max_input_size);
 if (buf_size <= 0)
 {
 return (NULL);
@@ -22,6 +22,7 @@ return (NULL);
 buf_idx = 0;
 }
 
+int line_length;
 char *nline_ptr = strchr(buf + buf_idx, '\n');
 if (nline_ptr != NULL)
 {
@@ -38,6 +39,7 @@ buf_idx += line_length + 1;
 return (line);
 }
 
+line_length = strlen(buf + buf_idx);
 char *line = strdup(buf + buf_idx);
 buf_idx = buf_size;
 return (line);
@@ -76,11 +78,12 @@ wait(NULL);
 
 int main(void)
 {
+	char *input = first_getline();
 while (1)
 {
 printf("$   ");
 
-char *input = first_getline();
+input = first_getline();
 
 if (input == NULL)
 {
