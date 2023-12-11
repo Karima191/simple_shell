@@ -46,6 +46,7 @@ void ProcessUserInput(char *input, const char *path)
 	char *token = strtok(MutableInput, " ");
 	char *pathcopy;
 	char *pathToken;
+	char cmdPath[max_path_size];
 
 if (token == NULL)
 {
@@ -54,7 +55,6 @@ if (token == NULL)
 pathcopy = strdup(path);
 pathToken = strtok(pathcopy, ":");
 
-char cmdPath[max_path_size];
 while (pathToken != NULL)
 {
 snprintf(cmdPath, sizeof(cmdPath), "%s/%s", pathToken, token);
