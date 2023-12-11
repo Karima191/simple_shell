@@ -10,10 +10,10 @@
 char *first_getline(void)
 {
 	int buf_idx = 0;
-	int buf_size;
+	int buf_size = max_input_size;
 	char buf[max_input_size];
-	char *line;
-	char *nline_ptr;
+	char *line = NULL;
+	char *nline_ptr = NULL;
 if (buf_idx >= buf_size)
 {
 buf_size = read(0, buf, max_input_size);
@@ -24,7 +24,7 @@ return (NULL);
 buf_idx = 0;
 }
 
-*nline_ptr = strchr(buf + buf_idx, '\n');
+nline_ptr = strchr(buf + buf_idx, '\n');
 if (nline_ptr != NULL)
 {
 *nline_ptr = '\0';
