@@ -54,7 +54,7 @@ char *var, *val;
 
 printf("Please enter the command: ");
 fgets(cmd, sizeof(cmd), stdin);
-cd = strtok(cmd, " \n");
+
 if (strcmp(cmd, "setenv") == 0)
 {
 var = strtok(NULL, " \n");
