@@ -1,7 +1,6 @@
 #include "shell.h"
 
 #define buf_size 1010
-#define stdin_fileno
 
 void ctm_strtok(char *input)
 {
@@ -20,21 +19,18 @@ printf("%s\n", tok);
 void ctm_getline(void)
 {
 static char buf[buf_size];
-static int locl = 1;
-static int chars_read = 1;
 
-while (1)
+ssize_t chars_read;
+size_t locl = 1;
+
+chars_read = read(fileno(stdin), buf, buf_size);
+if (chars_read == -1)
 {
-if (locl == chars_read)
-{
-locl = 0;
-chars_read = read(stdin_fileno, buf, buf_size);
-if (chars_read == 0)
-{
-return;
-}
+	perror("read");
 }
 
+while (locl <= chars_read)
+{
 char curt_char = buf[locl++];
 if (curt_char == '\n')
 {
