@@ -24,7 +24,7 @@ return (0);
 *Function to unset an environment variable
 *Print error message if the argument is missing
 *Print error message if unsetting the environment variable fails
-*
+*/
 
 int set_env2(char *var)
 {
@@ -61,7 +61,7 @@ var = strtok(NULL, " \n");
 val = strtok(NULL, " \n");
 set_env1(var, val);
 }
-else if (strcmp(cmd, "unsetenv") == 0
+else if (strcmp(cmd, "unsetenv") == 0)
 {
 var = strtok(NULL, " \n");
 set_env2(var);
@@ -71,3 +71,4 @@ else
 fprintf(stderr, "Invalid command\n");
 }
 return (0);
+}
