@@ -44,6 +44,8 @@ int main(void)
 {
 char input[max_input_size];
 char *path = getenv("PATH");
+char *token;
+char cmdPath[max_path_size];
 
 while (1)
 {
@@ -57,15 +59,14 @@ break;
 input[strcspn(input, "\n")] = '\0';
 
 
-char *token = strtok(input, " ");
+token = strtok(input, " ");
 if (token == NULL)
 {
 continue;
-
 }
-char cmdPath[max_path_size];
 char *pathcopy = strdup(path);
 char *pathToken = strtok(pathcopy, ":");
+
 while (pathToken != NULL)
 {
 snprintf(cmdPath, sizeof(cmdPath), "%s/%s", pathToken, token);
