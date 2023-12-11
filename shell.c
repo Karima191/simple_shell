@@ -11,23 +11,26 @@
 
 int main(void)
 {
-while (1)
-{
-char cmd[110];
-printf("Please enter your command : ");
-fgets(cmd, sizeof(cmd), stdin);
-cmd[strcspn(cmd, "\n")] = 0;
-char *tok = strtok(cmd, ";");
-while (tok != NULL)
-}
-if (strcmp(tok, "exit") == 0)
-{
-printf("Exiting the shell...\n");
-exit(0);
-}
-system(tok);
-tok = strtok(NULL, ";");
-}
-}
-return (0);
+	char *tok;
+
+	while (1)
+	{
+		char cmd[110];
+
+		printf("Please enter your command : ");
+		fgets(cmd, sizeof(cmd), stdin);
+		cmd[strcspn(cmd, "\n")] = 0;
+		tok = strtok(cmd, ";");
+		while (tok != NULL)
+		{
+			if (strcmp(tok, "exit") == 0)
+			{
+				printf("Exiting the shell!...\n");
+				exit(0);
+			}
+			system(tok);
+			tok = strtok(NULL, ";");
+		}
+	}
+	return (0);
 }
