@@ -14,6 +14,7 @@ char *first_getline(void)
 	char buf[max_input_size];
 	char *line = NULL;
 	char *nline_ptr = NULL;
+	size_t line_length;
 if (buf_idx >= buf_size)
 {
 buf_size = read(0, buf, max_input_size);
@@ -29,7 +30,7 @@ if (nline_ptr != NULL)
 {
 *nline_ptr = '\0';
 
-size_t line_length = nline_ptr - (buf + buf_idx);
+line_length = nline_ptr - (buf + buf_idx);
 
 line = malloc(line_length + 1);
 strncpy(line, buf + buf_idx, line_length);
@@ -40,7 +41,7 @@ buf_idx += line_length + 1;
 return (line);
 }
 
-size_t line_length = strlen(buf + buf_idx);
+line_length = strlen(buf + buf_idx);
 line = strdup(buf + buf_idx);
 buf_idx += line_length + 1;
 return (line);
