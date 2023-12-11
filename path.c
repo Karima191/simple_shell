@@ -46,7 +46,7 @@ void ProcessUserInput(char *input, const char *path)
 	char *token = strtok(MutableInput, " ");
 if (token == NULL)
 {
-	free(MultableInput);
+	free(MutableInput);
 }
 char *pathcopy = strdup(path);
 char *pathToken = strtok(pathcopy, ":");
