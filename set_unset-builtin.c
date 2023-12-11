@@ -50,7 +50,7 @@ return (0);
 int main(void)
 {
 char cmd[110];
-char *cd, *var, *val;
+char *var, *val;
 
 printf("Please enter the command: ");
 fgets(cmd, sizeof(cmd), stdin);
