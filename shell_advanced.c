@@ -21,7 +21,7 @@ void ctm_getline(void)
 static char buf[buf_size];
 
 ssize_t chars_read;
-size_t locl = 1;
+ssize_t locl = 1;
 
 chars_read = read(fileno(stdin), buf, buf_size);
 if (chars_read == -1)
