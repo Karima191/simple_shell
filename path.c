@@ -40,13 +40,34 @@ waitpid(pid, NULL, 0);
 *and executes the command if it exists.
 */
 
+void ProcessUserInput(const char *input, const char *path)
+{
+char *token = strtok(input, " ");
+if (token == NULL)
+{
+return;
+}
+char *pathcopy = strdup(path);
+char *pathToken = strtok(pathcopy, ":");
+
+char cmdPath[max_path_size];
+while (pathToken != NULL)
+{
+snprintf(cmdPath, sizeof(cmdPath), "%s/%s", pathToken, token);
+if (access(cmdPath, X_OK) == 0)
+{
+execCmd(cmdPath);
+break;
+}
+pathToken = strtok(NULL, ":");
+}
+free(pathcopy);
+}
+
 int main(void)
 {
 char input[max_input_size];
 char *path = getenv("PATH");
-char *token;
-char cmdPath[max_path_size];
-char *pathcopy;
 
 while (1)
 {
@@ -59,26 +80,7 @@ break;
 
 input[strcspn(input, "\n")] = '\0';
 
-
-token = strtok(input, " ");
-if (token == NULL)
-{
-continue;
-}
-pathcopy = strdup(path);
-char *pathToken = strtok(pathcopy, ":");
-
-while (pathToken != NULL)
-{
-snprintf(cmdPath, sizeof(cmdPath), "%s/%s", pathToken, token);
-if (access(cmdPath, X_OK) == 0)
-{
-execCmd(cmdPath);
-break;
-}
-pathToken = strtok(NULL, ":");
-}
-free(pathcopy);
+ProcessUserInput(input, path);
 }
 free(path);
 
