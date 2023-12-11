@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include "shell.h"
 
 #define max_input_size 1000
 #define max_path_size 1000
@@ -32,7 +29,7 @@ exit(EXIT_FAILURE);
 }
 else
 {
-wait(NULL);
+waitpid(pid, NULL, 0);
 }
 }
 
@@ -67,7 +64,8 @@ continue;
 
 }
 char cmdPath[max_path_size];
-char *pathToken = strtok(path, ":");
+char *pathcopy = strdup(path);
+char *pathToken = strtok(pathcopy, ":");
 while (pathToken != NULL)
 {
 snprintf(cmdPath, sizeof(cmdPath), "%s/%s", pathToken, token);
@@ -78,7 +76,9 @@ break;
 }
 pathToken = strtok(NULL, ":");
 }
+free(pathcopy);
 }
+free(path);
 
 return (0);
 }
