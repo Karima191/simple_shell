@@ -46,6 +46,7 @@ char input[max_input_size];
 char *path = getenv("PATH");
 char *token;
 char cmdPath[max_path_size];
+char *pathcopy;
 
 while (1)
 {
@@ -64,7 +65,7 @@ if (token == NULL)
 {
 continue;
 }
-char *pathcopy = strdup(path);
+pathcopy = strdup(path);
 char *pathToken = strtok(pathcopy, ":");
 
 while (pathToken != NULL)
