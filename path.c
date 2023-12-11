@@ -44,12 +44,15 @@ void ProcessUserInput(char *input, const char *path)
 {
 	char *MutableInput = strdup(input);
 	char *token = strtok(MutableInput, " ");
+	char *pathcopy;
+	char *pathToken;
+
 if (token == NULL)
 {
 	free(MutableInput);
 }
-char *pathcopy = strdup(path);
-char *pathToken = strtok(pathcopy, ":");
+pathcopy = strdup(path);
+pathToken = strtok(pathcopy, ":");
 
 char cmdPath[max_path_size];
 while (pathToken != NULL)
@@ -62,7 +65,7 @@ break;
 }
 pathToken = strtok(NULL, ":");
 }
-free(MultableInput);
+free(MutableInput);
 free(pathcopy);
 }
 
