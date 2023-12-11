@@ -13,7 +13,8 @@ char *first_getline(void)
 	int buf_size;
 	char buf[max_input_size];
 	int line_length;
-	char *line;
+	char line;
+	char *nline_ptr;
 if (buf_idx >= buf_size)
 {
 buf_size = read(0, buf, max_input_size);
@@ -24,7 +25,7 @@ return (NULL);
 buf_idx = 0;
 }
 
-char *nline_ptr = strchr(buf + buf_idx, '\n');
+*nline_ptr = strchr(buf + buf_idx, '\n');
 if (nline_ptr != NULL)
 {
 *nline_ptr = '\0';
@@ -41,7 +42,7 @@ return (line);
 }
 
 line_length = strlen(buf + buf_idx);
-char *line = strdup(buf + buf_idx);
+line = strdup(buf + buf_idx);
 buf_idx = buf_size;
 return (line);
 }
