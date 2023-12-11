@@ -34,18 +34,19 @@ waitpid(pid, NULL, 0);
 }
 
 /**
-* Main function
-* This function reads user input, tokenizes it,
-*checks for the command in the system's PATH,
-*and executes the command if it exists.
+* Process user input
+* This function tokenizes the input
+* and checks for the command in the system's PATH,
+* then executes the command if it exists.
 */
 
-void ProcessUserInput(const char *input, const char *path)
+void ProcessUserInput(char *input, const char *path)
 {
-char *token = strtok(input, " ");
+	char *MutableInput = strdup(input);
+	char *token = strtok(MutableInput, " ");
 if (token == NULL)
 {
-return;
+	free(MultableInput);
 }
 char *pathcopy = strdup(path);
 char *pathToken = strtok(pathcopy, ":");
@@ -61,8 +62,14 @@ break;
 }
 pathToken = strtok(NULL, ":");
 }
+free(MultableInput);
 free(pathcopy);
 }
+
+/**
+* Main function
+* This function reads user input and processes it.
+*/
 
 int main(void)
 {
