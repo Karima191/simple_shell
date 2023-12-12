@@ -52,7 +52,7 @@ else if (pid == 0)
 {
 execlp(cmd, cmd, (char *)NULL);
 
-fprintf(stderr, "This command is unfounded : % s\n ", cmd);
+fprintf(stderr, "This command is unfounded : %s\n ", cmd);
 exit(EXIT_FAILURE);
 }
 else
@@ -70,7 +70,7 @@ void print_env(void)
 char **env1 = environ;
 while (*env1 != NULL)
 {
-printf(" % s\n ", *env1);
+printf(" %s\n ", *env1);
 env1++;
 }
 }
@@ -99,7 +99,7 @@ return;
 pathtok = strtok(path, " : ");
 while (pathtok != NULL)
 {
-snprintf(cmdpath, sizeof(cmdpath), " % s / % s ", pathtok, tok);
+snprintf(cmdpath, sizeof(cmdpath), " %s / %s ", pathtok, tok);
 if (access(cmdpath, Y_OK) == 0)
 {
 execCmd(cmdpath);
