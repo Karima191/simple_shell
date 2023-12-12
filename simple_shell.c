@@ -1,21 +1,43 @@
-#include "shell.h"
+"include "shell.h"
 
 /**
 * The shell program that takes user input, interprets commands,
 * and executes them or performs specific actions.
 */
 
-extern char **environ;
-
 #define max_input_size 1050
 #define max_path_size 1050
-#define wait
 #define Y_OK  F_OK
 
+extern char **environ;
+
 /**
-* Execute a command using fork and execlp.
-* @param cmd The command to execute.
+* The main function of the shell program.
+* Accepts user input, interprets commands, and executes them.
 */
+void execCmd(char *cmd);
+void print_env(void);
+void ProcessUserInput(char *input, char *path);
+
+int main(void)
+{
+char input[max_input_size];
+char *path = getenv("PATH");
+
+while (1)
+{
+printf("$ ");
+if (fgets(input, max_input_size, stdin) == NULL)
+{
+break;
+}
+
+input[strcspn(input, "\n")] = '\0';
+
+ProcessUserInput(input, path);
+}
+return (0);
+}
 
 void execCmd(char *cmd)
 {
@@ -30,12 +52,12 @@ else if (pid == 0)
 {
 execlp(cmd, cmd, (char *)NULL);
 
-fprintf(stderr, "This command is unfounded: %s\n", cmd);
+fprintf(stderr, "This command is unfounded : % s\n ", cmd);
 exit(EXIT_FAILURE);
 }
 else
 {
-wait(NULL);
+waitpid(pid, NULL, 0);
 }
 }
 
@@ -48,60 +70,42 @@ void print_env(void)
 char **env1 = environ;
 while (*env1 != NULL)
 {
-printf("%s\n", *env1);
+printf(" % s\n ", *env1);
 env1++;
 }
 }
 
-/**
-* The main function of the shell program.
-* Accepts user input, interprets commands, and executes them.
-*/
-
-int main(void)
+void ProcessUserInput(char *input, char *path)
 {
-char input[max_input_size];
-char *path = getenv("PATH");
-
-while (1)
-{
-printf("$ ");
-
-if (fgets(input, max_input_size, stdin) == NULL) {
-break;
-}
-
-input[strcspn(input, "\n")] = '\0';
-
 char *tok = strtok(input, " ");
+char cmdpath[max_path_size];
+char *pathtok;
 if (tok == NULL)
 {
-continue;
+return;
 }
 
 if (strcmp(tok, "Exit") == 0)
 {
-printf("Exit the shell!...\n");
-break;
+printf("Exit the shell !...\n");
+exit(exit_success);
 }
 
 if (strcmp(tok, "env") == 0)
 {
 print_env();
-continue;
+return;
 }
-
-char cmdpath[max_path_size];
-char *pathtok = strtok(path, " : ");
+pathtok = strtok(path, " : ");
 while (pathtok != NULL)
 {
-snprintf(cmdpath, sizeof(cmdpath), "%s/%s", pathtok, tok);
+snprintf(cmdpath, sizeof(cmdpath), " % s / % s ", pathtok, tok);
 if (access(cmdpath, Y_OK) == 0)
 {
 execCmd(cmdpath);
-break;
+return;
 }
-pathtok = strtok(NULL, ":");
+pathtok = strtok(NULL, " : ");
 }
 }
 
