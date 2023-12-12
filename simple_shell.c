@@ -108,4 +108,3 @@ return;
 pathtok = strtok(NULL, " : ");
 }
 }
-return (0);
