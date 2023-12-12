@@ -88,7 +88,7 @@ return;
 if (strcmp(tok, "Exit") == 0)
 {
 printf("Exit the shell !...\n");
-exit(exit_success);
+exit(EXIT_SUCCESS);
 }
 
 if (strcmp(tok, "env") == 0)
@@ -108,6 +108,4 @@ return;
 pathtok = strtok(NULL, " : ");
 }
 }
-
 return (0);
-}
